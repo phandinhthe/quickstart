@@ -1,0 +1,44 @@
+<h1>My first {{ appName }} app</h1>
+
+<label>{{ title }}</label> <br>
+<label>My favourite hero: </label> {{ favouriteHero.name }} <br>
+<label>My hateful hero: </label> {{ hatefulHero.name }} <br>
+
+<h2>Two-way data binding</h2><br>
+<input placeholder="name" [(ngModel)]="favouriteHero.name"> [(ngModel)]="favouriteHero.name"<br>
+
+<h2>1-way data binding</h2><br>
+<input (input)="favouriteHero.name=$event.target.value"> (input)="favouriteHero.name=$event.target.value" <br>
+
+<h2>Two-way data binding and set upper case</h2><br>
+<input (input)="favouriteHero.name=$event.target.value.toUpperCase()">(input)="favouriteHero.name=$event.target.value.toUpperCase()"<br>
+<br> <hr> <br>
+
+<h1>List of Justice League's Heroes</h1>
+
+<ul class="heroes">
+  <li *ngFor="let hero of heroes"
+      [class.selected]="hero === selectedHero"
+      (click)="onSelect(hero)">
+    <span class="badge">{{ hero.id }}.</span> {{ hero.name }}
+    <button class="delete"
+            (click)="delete(hero); $event.stopPropagation()">x</button>
+
+  </li>
+</ul>
+
+<div>
+  <label>Hero name:</label> <input #heroName />
+  <button (click)="add(heroName.value); heroName.value=''">
+    Add
+  </button>
+</div>
+
+<div *ngIf="selectedHero">
+  <h2>
+    {{selectedHero.name | uppercase}} is my hero
+  </h2>
+  <button (click)="goToDetails()">View Details</button>
+</div>
+
+
